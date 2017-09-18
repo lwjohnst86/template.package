@@ -1,0 +1,23 @@
+image: r-base:latest
+
+before_script:
+    - Rscript -e 'install.packages(c("devtools"))'
+    - Rscript -e 'devtools::install_github("hadley/pkgdown")'
+
+test:
+    script:
+        - Rscript -e 'devtools::install_dev_deps()'
+        - Rscript -e 'devtools::check()'
+    tags:
+        - docker
+
+pages:
+    stage: deploy
+    script:
+        - Rscript -e "pkgdown::build_site('.')"
+        - mv docs public
+    artifacts:
+        paths:
+            - public
+    only:
+        - master
