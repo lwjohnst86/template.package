@@ -3,4 +3,5 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
+^\.gitlab-ci\.yml$
 ^docs$
